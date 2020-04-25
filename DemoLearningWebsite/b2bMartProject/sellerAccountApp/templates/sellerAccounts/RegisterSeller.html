@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<title>Register Seller In</title>
+	<link rel="icon" type="image/png" href="{% static 'images/fav.png' %}">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'css/line-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/color.css' %}">
+	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+	<link rel="stylesheet" href="{% static 'css/perfect-scrollbar.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/jquery.datepicker.min.css' %}">
+
+	<script src="{% static 'js/sweetalert.min.js' %}"></script>
+	<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+</head>
+<body style=" background: rgba(0, 0, 0, 0) linear-gradient(to right, #667eea 0%, #764ba2 100%) repeat scroll 0 0; ">
+<!-- Start Page Loading -->
+	<div id="loader-wrapper">
+		<div id="loader"></div>
+		<div class="loader-section section-left"></div>
+		<div class="loader-section section-right"></div>
+	</div>
+
+	<div class="panel-layout">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="">
+						<div class="admin-form w-75">
+							<div class="logo text-center"><img src="{% static 'images/logo2.png' %}" alt=""></div>
+
+							<h4 class="text-center">Register Seller</h4>
+							<div class="tab-style mt-4">
+								<ul class="tab nav nav-tabs tab-btns">
+									<li class="nav-item w-25"><a class=" w-100 {% if mobileNumberForm %} active show {% endif %} disabled" href="#CreateSeller" data-toggle="tab">Create Account</a></li>
+									<li class="nav-item w-25"><a class=" w-100 {% if BusinessDetailsForm1 and BusinessDetailsForm2 %} active show {% endif %} disabled" href="#BusinessDetails" data-toggle="tab">Business Details</a></li>
+									<li class="nav-item w-25"><a class=" w-100 {% if AddProductForm1 %} active show {% endif %} disabled"  href="#AddProducts" data-toggle="tab">Add Products</a></li>
+									<li class="nav-item w-25"><a class=" w-100 {% if BusinessAddressForm %} active show {% endif %} disabled" href="#SellerAddress" data-toggle="tab">Address</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade {% if mobileNumberForm %} active show {% endif %}" id="CreateSeller">
+										<div class="tab-meta">
+											{% if mobileNumberForm %}
+											<form class="site-form" action="{% url 'sellerAccountUrls:RegisterSeller' %}" method="post">
+												{% csrf_token %}
+
+												<div class="add-prod-from">
+													<div class="row">
+														<div class="col-md-6">
+															<div class="input-group">
+																<label>Enter Registered Mobile no.</label>
+																<span class="input-group-addon"><i>+91</i></span>
+																<!--<input class="form-control" name="email" placeholder="" type="text">-->
+																{{ mobileNumberForm.UserMobileNumber }}
+															</div>
+														</div>
+														{% if mobileNumberForm.UserMobileNumber.errors %}
+														<div class="col-6 b-0">
+															<div class="alert alert-warning brd-5"> <i><img src="{% static 'images/warning-icon.png' %}" alt="" /></i>
+															<p><strong>Head Up!</strong> {{ mobileNumberForm.UserMobileNumber.errors }} </p>
+															</div>
+														</div>
+														{% else %}
+														<div class="col-6 b-0">
+
+														</div>
+														{%endif%}
+														<div class="col-md-6">
+															<div class="buttonz">
+																<button type="submit">Verify</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+											{% endif %}
+										</div>
+									</div>
+									<div class="tab-pane fade {% if BusinessDetailsForm1 and BusinessDetailsForm2 %} active show {% endif %}" id="BusinessDetails">
+										<div class="tab-meta">
+											{% if BusinessDetailsForm1 and BusinessDetailsForm2 %}
+											<form class="site-form" action="{% url 'sellerAccountUrls:sellerBusinessUpdate' %}" method="post">
+												{% csrf_token %}
+														
+												<div class="inner-bg">
+													<div class="element-title">
+														<h4>Add business details</h4>
+														<hr>
+													</div>
+													<div class="pnl-bdy billing-sec">
+														<div class="row">
+															<div class="col-md-6 col-sm-6 field">
+																<label>Company Name <span>*</span> </label>
+																{{ BusinessDetailsForm1.UserCompanyName }}
+															</div>
+															<div class="col-6 b-0">
+	
+															</div>
+															
+															<div class="col-md-6 col-sm-6 field">
+																<label>Email <span>*</span> </label>
+																{{ BusinessDetailsForm2.email }}
+															</div>
+															<div class="col-md-6">
+																<div class="buttonz">
+																	<button type="submit">Verify E-Mail</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+											{% endif %}
+										</div>
+									</div>
+									<div class="tab-pane fade {% if AddProductForm1 and AddProductForm2 and AddProductForm3 %} active show {% endif %}" id="AddProducts">
+										<div class="tab-meta">
+											{% if AddProductForm1 and AddProductForm2 and AddProductForm3 %}
+											<form class="" action="{% url 'sellerAccountUrls:sellerAddProducts$' %}" method="post" enctype="multipart/form-data">
+												{% csrf_token %}
+												
+												<div class="inner-bg">
+													<div class="element-title">
+														<h4>What would you like to sell?</h4>
+														<hr>
+													</div>
+													<div class="pnl-bdy billing-sec">
+														<div class="row">
+															<div class="col-md-4 col-sm-4 ">
+																<div class="card img-fluid" style="width:400px">
+																	<img id="blah" class="card-img-top" src="{% static 'images/DefaultProductPicture.png' %}" alt="Card image" style="width:auto;height:200px;">
+																	<div class="card-img-overlay-bottom">
+																		{{ AddProductForm1.ProductImageUrl }}
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-4 col-sm-4 ">
+																<div class="card img-fluid" style="width:400px">
+																	<img id="blah2" class="card-img-top" src="{% static 'images/DefaultProductPicture.png' %}" alt="Card image" style="width:auto;height:200px;">
+																	<div class="card-img-overlay-bottom">
+																		{{ AddProductForm2.ProductImageUrl }}
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-4 col-sm-4 ">
+																<div class="card img-fluid" style="width:400px">
+																	<img id="blah3" class="card-img-top" src="{% static 'images/DefaultProductPicture.png' %}" alt="Card image" style="width:auto;height:200px;">
+																	<div class="card-img-overlay-bottom">
+																		{{ AddProductForm3.ProductImageUrl }}
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-4 col-sm-4 mt-2 field">
+																{{ AddProductForm1.ProductName }}
+															</div>
+															<div class="col-md-4 col-sm-4 mt-2 field">
+																{{ AddProductForm2.ProductName }}
+															</div>
+															<div class="col-md-4 col-sm-4 mt-2 field">
+																{{ AddProductForm3.ProductName }}
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-3 col-sm-3 ">
+															
+															</div>
+															<div class="col-md-3 col-sm-3 ">
+															
+															</div>
+															<div class="col-md-3 col-sm-3 ">
+															
+															</div>
+															<div class="col-md-3 col-sm-3 ">
+																<div class="buttonz ">
+																	<button class="m-0 w-100" type="submit">Add Products</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+											{% endif %}
+										</div>
+									</div>
+									<div class="tab-pane fade {% if BusinessAddressForm %} active show {% endif %}" id="SellerAddress">
+										<div class="tab-meta">
+											{% if BusinessAddressForm %}
+											<form class="site-form" action="{% url 'sellerAccountUrls:sellerBusinessAddress$' %}" method="post">
+												{% csrf_token %}
+												
+												<div class="inner-bg">
+													<div class="element-title">
+														<h4>Add business details</h4>
+														<hr>
+													</div>
+													<div class="pnl-bdy billing-sec">
+														<div class="row">
+															<div class="col-md-12 col-sm-12 field">
+																<label>Address<span>*</span> </label>
+																{{ BusinessAddressForm.SellerAddress }}
+															</div>
+															
+															<div class="col-md-6 col-sm-6 field">
+																<label>Locality</label>
+																{{ BusinessAddressForm.SellerAddressLocality }}
+															</div>
+															<div class="col-md-6">
+																<label>City</label>
+																{{ BusinessAddressForm.SellerAddressCity }}
+															</div>
+															
+															<div class="col-md-6 col-sm-6 field">
+																<label>Pin Code</label>
+																{{ BusinessAddressForm.SellerAddressPinCode }}
+															</div>
+															<div class="col-md-6">
+																<label>State</label>
+																{{ BusinessAddressForm.SellerAddressState }}
+															</div>
+															
+															<div class="col-md-6 col-sm-6 field">
+																<label>Country<span>*</span> </label>
+																{{ BusinessAddressForm.SellerAddressCountry }}
+															</div>
+															<div class="col-md-6">
+																<div class="buttonz">
+																	<button type="submit">Start Selling</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#blah').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		function readURL2(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#blah2').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		function readURL3(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#blah3').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		$("#id_ProductImageUrl1").change(function(){
+			readURL(this);
+		});
+		$("#id_ProductImageUrl2").change(function(){
+			readURL2(this);
+		});
+		$("#id_ProductImageUrl3").change(function(){
+			readURL3(this);
+		});
+	</script>
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+
+</html>

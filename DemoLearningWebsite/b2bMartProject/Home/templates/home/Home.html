@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<title>Sign In</title>
+	<link rel="icon" type="image/png" href="{% static 'images/fav.png' %}">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'css/line-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/color.css' %}">
+	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+	<script src="{% static 'js/sweetalert.min.js' %}"></script>
+	<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+</head>
+<body>
+	{% if from_page != None and from_page  %}
+		<script>
+			$( document ).ready(function() {
+	                  swal("{{ from_page }}");
+			});
+		</script>
+	{% endif %}
+	<p>this is home page</p>
+
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+
+
+</html>

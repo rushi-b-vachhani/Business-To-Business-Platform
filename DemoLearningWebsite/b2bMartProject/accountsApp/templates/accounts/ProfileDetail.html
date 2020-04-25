@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<title>Web Admin panel</title>
+	<link rel="icon" type="image/png" href="{% static 'images/fav.png' %}">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'css/line-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/color.css' %}">
+	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</head>
+<body>
+<!-- Start Page Loading -->
+	<div id="loader-wrapper">
+      	<div id="loader"></div>
+      	<div class="loader-section section-left"></div>
+      	<div class="loader-section section-right"></div></div>
+<div class="panel-layout">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="admin-lock ">
+					<div class="admin-form">
+						<div class="logo"><img src="{% static 'images/logo2.png' %}" alt=""></div>
+						<h4>Profile</h4>
+						<span>Please enter your profile & company details</span>
+						<form class="site-form" action="{% url 'accounts:ProfileDetail' %}" method="post">
+							
+							{% csrf_token %}
+
+							<label><i class="fa fa-image"></i></label>
+							<div>
+								{{ profileForm.UserProfilePictureUrl }}
+							</div>
+							{{ profileForm.UserProfilePictureUrl.errors }}
+							<label><i class="fa fa-mobile fa-2x"></i></label>
+							<div>
+								{{ profileForm.UserMobileNumber }}
+							</div>
+							{{ profileForm.UserMobileNumber.errors }}
+							<label><i class="fa fa-mobile fa-2x"></i></label>
+							<div>
+								{{ profileForm.UserAltMobileNumber }}
+							</div>
+							{{ profileForm.UserAltMobileNumber.errors }}
+                           			<label><i class="fa fa-building-o fa-lg"></i></label>
+							<div>
+								{{ profileForm.UserCompanyName }}
+							</div>
+							{{ profileForm.UserCompanyName.errors }}
+                            			<label><i class="fa fa-calendar fa-lg"></i></label>
+							<div>
+								{{ profileForm.UserCompanyYear }}
+							</div>
+							{{ profileForm.UserCompanyYear.errors }}
+
+							{{ profileForm.non_field_errors }}
+							<!--<input type="checkbox" id="checkbox">-->
+							<!--<label for="checkbox">I accept the <a href="#" title="">terms & Conditions</a></label>-->
+							<button class="submit_button" type="submit">SAVE PROFILE</button>
+						</form>
+						<span><a href="{% url 'homeAppUrls:home' %}" title="">Skip >></a></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+
+</html>
